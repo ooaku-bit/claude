@@ -1,6 +1,5 @@
 # auto-sync.ps1
-# GitHub から C:\Claude を自動的に同期するスクリプト
-# Windows Task Scheduler で定期実行することを推奨
+# Automatically pull latest changes from GitHub
 
 $repoPath = "C:\Claude"
 $logFile  = "$repoPath\scripts\sync.log"
@@ -13,7 +12,6 @@ function Write-Log($msg) {
 
 Set-Location $repoPath
 
-# リモートの変更を確認
 git fetch origin $branch 2>&1 | Out-Null
 
 $local  = git rev-parse HEAD
@@ -24,7 +22,6 @@ if ($local -eq $remote) {
     exit 0
 }
 
-# 変更があればプル
 $result = git pull origin $branch 2>&1
 Write-Log "Pulled: $result"
 Write-Log "Sync complete."

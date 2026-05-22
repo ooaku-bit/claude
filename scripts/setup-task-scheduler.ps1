@@ -1,15 +1,13 @@
 # setup-task-scheduler.ps1
-# Windows Task Scheduler に auto-sync を登録するスクリプト
-# 管理者権限で実行してください
+# Run as Administrator
 
 $taskName   = "ClaudeAutoSync"
 $scriptPath = "C:\Claude\scripts\auto-sync.ps1"
 $interval   = 15
 
-# 既存タスクがあれば削除
 if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-    Write-Host "既存タスクを削除しました"
+    Write-Host "Removed existing task."
 }
 
 $action = New-ScheduledTaskAction `
@@ -31,10 +29,10 @@ Register-ScheduledTask `
     -Action $action `
     -Trigger $trigger `
     -Settings $settings `
-    -Description "C:\Claude を GitHub から ${interval} 分ごとに自動同期" `
+    -Description "Auto sync C:\Claude from GitHub every $interval min" `
     -RunLevel Highest `
     -Force
 
-Write-Host "[OK] タスク登録完了: $taskName"
-Write-Host "     同期間隔: ${interval} 分ごと"
-Write-Host "     スクリプト: $scriptPath"
+Write-Host "[OK] Task registered: $taskName"
+Write-Host "     Interval: $interval min"
+Write-Host "     Script: $scriptPath"
