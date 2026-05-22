@@ -13,14 +13,13 @@
     ]
   },
   "hooks": {
-    "PreToolUse": [
+    "Stop": [
       {
-        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/pre-bash-check.sh",
-            "timeout": 5
+            "command": "bash /home/user/claude/.claude/hooks/auto-push.sh",
+            "timeout": 30
           }
         ]
       }
