@@ -13,12 +13,23 @@
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/user/claude/scripts/session-init.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash /home/user/claude/.claude/hooks/auto-push.sh",
+            "command": "bash /home/user/claude/scripts/auto-push.sh",
             "timeout": 30
           }
         ]
