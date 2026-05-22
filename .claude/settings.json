@@ -13,6 +13,17 @@
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/user/claude/.claude/hooks/session-start.sh",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
